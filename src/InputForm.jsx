@@ -39,13 +39,13 @@ export default function InputForm({ onCalculationComplete }) {
       <div className="relative rounded-3xl p-6 bg-gradient-to-r from-[#002060] to-[#0050b3] shadow-2xl overflow-hidden mb-6 border border-blue-400/20">
         <div className="text-xs font-bold text-amber-400 tracking-widest uppercase flex items-center gap-2 mb-1">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
-          BRI Geo-Intelligence Platform
+          BRI Geo-AI Analysis for Relocations
         </div>
         <h1 className="text-2xl font-black text-white tracking-tight m-0">
           Relocation Network Optimizer
         </h1>
         <div className="text-xs text-blue-200 mt-1">
-          Channel Location Optimization Matrix
+          by Channel Location Optimization Team
         </div>
       </div>
 
