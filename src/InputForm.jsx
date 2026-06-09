@@ -49,11 +49,11 @@ export default function InputForm({ onCalculationComplete }) {
               ONLINE
             </div>
 
-            {/* UBAH BAGIAN JUDUL H1 NYA JADI SEPERTI INI */}
+            {/*H1*/}
             <h1
               className="text-3xl md:text-4xl font-extrabold m-0 p-0 tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 font-sans"
               style={{
-                letterSpacing: "-0.05em", // Mempersempit jarak antar huruf biar padat kek dashboard premium
+                letterSpacing: "-0.05em",
                 textShadow: "0 2px 10px rgba(255,255,255,0.05)",
               }}
             >
@@ -72,7 +72,7 @@ export default function InputForm({ onCalculationComplete }) {
           </div> */}
         </div>
 
-        {/* Thin Tech Line — Efek garis bias cahaya di dasar komponen */}
+        {/* Thin Tech Line*/}
         <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       </div>
 
