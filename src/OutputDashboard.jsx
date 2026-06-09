@@ -70,8 +70,12 @@ export default function OutputDashboard({ resultData, onBackToInput }) {
       {/* Header */}
       <div className="bg-gradient-to-r from-[#060f24] to-[#10234a] border border-blue-900/40 rounded-3xl p-5 flex justify-between items-center gap-4 flex-wrap">
         <div>
-          <div className="text-[10px] font-bold text-orange-400 uppercase tracking-widest mb-1">
-            📈 Geo-Spatial Jaringan Kantor Komparator
+          <div className="text-xs font-bold text-amber-400 tracking-widest uppercase flex items-center gap-2 mb-1">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            ONLINE
           </div>
           <h2 className="text-xl font-black text-white tracking-tight m-0">
             Hasil Pemodelan Relokasi Wilayah

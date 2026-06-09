@@ -35,18 +35,45 @@ export default function InputForm({ onCalculationComplete }) {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 my-4 animate-fadeIn text-left">
-      {/* Header Visual Dashboard */}
-      <div className="relative rounded-3xl p-6 bg-gradient-to-r from-[#002060] to-[#0050b3] shadow-2xl overflow-hidden mb-6 border border-blue-400/20">
-        <div className="text-xs font-bold text-amber-400 tracking-widest uppercase flex items-center gap-2 mb-1">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block"></span>
-          BRI Geo-AI Analysis for Relocations
+      {/*Header */}
+      <div className="relative rounded-3xl p-6 bg-[#0b1426]/60 border border-blue-500/20 shadow-2xl overflow-hidden mb-6 backdrop-blur-xl text-left">
+        <div className="absolute -top-24 -left-20 w-72 h-72 bg-[#003087]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 right-10 w-60 h-60 bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 z-10">
+          <div className="space-y-1">
+            <div className="text-xs font-bold text-amber-400 tracking-widest uppercase flex items-center gap-2 mb-1">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              ONLINE
+            </div>
+
+            {/* UBAH BAGIAN JUDUL H1 NYA JADI SEPERTI INI */}
+            <h1
+              className="text-3xl md:text-4xl font-extrabold m-0 p-0 tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400 font-sans"
+              style={{
+                letterSpacing: "-0.05em", // Mempersempit jarak antar huruf biar padat kek dashboard premium
+                textShadow: "0 2px 10px rgba(255,255,255,0.05)",
+              }}
+            >
+              BRANCH RELOCATION ANALYSIS
+            </h1>
+
+            <div className="text-xs text-blue-200 mt-1 font-medium opacity-90 flex items-center gap-1.5">
+              by Channel Location Optimization Team
+            </div>
+          </div>
+          {/* <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5 font-mono text-[10px]">
+            <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-slate-300 flex items-center gap-1.5 backdrop-blur-md shadow-inner select-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+              System : <span className="text-white font-bold">ONLINE</span>
+            </div>
+          </div> */}
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight m-0">
-          Relocation Network Optimizer
-        </h1>
-        <div className="text-xs text-blue-200 mt-1">
-          by Channel Location Optimization Team
-        </div>
+
+        {/* Thin Tech Line — Efek garis bias cahaya di dasar komponen */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       </div>
 
       {/* Switcher Tab Menu */}
