@@ -4,7 +4,7 @@ import { calcExisting, calcCandidate } from "./scoring";
 export default function InputForm({ onCalculationComplete }) {
   const [tab, setTab] = useState("exist");
   const [d, setD] = useState({
-    existName: "KCP Gatot Subroto",
+    existName: "",
     existBriCount2km: 2,
     existBriDistLt1: true,
     existBriType: "KCP",
@@ -12,7 +12,7 @@ export default function InputForm({ onCalculationComplete }) {
     existPeersDistLt1: true,
     existPotensi: "Growth",
     existPerf: "Medium",
-    candName: "Kawasan Industri BSD Tahap II",
+    candName: "",
     candBriCount2km: 0,
     candBriDistLt1: false,
     candBriType: "None",
