@@ -8,7 +8,6 @@ export default async function handler(req, res) {
   const { delta, existName, candName, spatialDensity, marketRisk } = req.body;
 
   try {
-    // API Key dibaca aman dari Environment Variable di server
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const prompt = `Anda adalah seorang Senior Data Scientist dan Ahli Strategi Jaringan Kantor Bank. 

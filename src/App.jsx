@@ -1,14 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import InputForm from "./InputForm";
 import OutputDashboard from "./OutputDashboard";
+import { GoogleGenAI } from "@google/genai";
 
 export default function App() {
   const [screen, setScreen] = useState("input");
   const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
+  const [aiInsight, setAiInsight] = useState("");
+  const [isLoadingAi, setIsLoadingAi] = useState(false);
+  const abortControllerRef = useRef(null);
+
+  const fetchAiInsight = async (payload) => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    abortControllerRef.current = new AbortController();
+
+    setIsLoadingAi(true);
+    setAiInsight("");
+    try {
+      const apiKey = "AQ.Ab8RN6JYgOo0jCXAGJzs43O_8b14GKbKiMOgCl-Ln5_7DADJDw";
+      const ai = new GoogleGenAI({ apiKey });
+      const delta = payload.candResult.total - payload.existResult.total;
+
+      const existScore = payload.existResult.total;
+      let existStatus = "Tidak Layak Direlokasi";
+      if (existScore >= 70) existStatus = "Layak Direlokasi";
+      else if (existScore >= 50) existStatus = "Perlu Kajian Lanjutan";
+
+      const candScore = payload.candResult.total;
+      let candStatus = "Tidak Direkomendasikan";
+      if (candScore >= 80) candStatus = "Layak Menjadi Candidate Location";
+      else if (candScore >= 60) candStatus = "Perlu Kajian Lanjutan";
+
+      const prompt = `Anda adalah seorang Senior Data Scientist dan Ahli Strategi Jaringan Kantor Bank. 
+      Berikan analisis eksekutif singkat (maksimal 3 kalimat) mengenai rencana relokasi ini:
+      - Nama Kantor Eksisting: ${payload.inputData.existName || "Eksisting"} (Skor: ${Math.round(existScore)}, Status Matriks: ${existStatus})
+      - Nama Lokasi Kandidat: ${payload.inputData.candName || "Kandidat"} (Skor: ${Math.round(candScore)}, Status Matriks: ${candStatus})
+      - Selisih Keunggulan Komposit Bersih (Delta): ${delta.toFixed(1)} poin
+      - Kategori Potensi Wilayah Kandidat: ${payload.inputData.candPotensi}
+      
+      Berikan kesimpulan akhir apakah langkah pemindahan logistik operasional ini bernilai taktis tinggi atau berisiko tinggi bagi rasio efisiensi bank. Gunakan bahasa formal perbankan Indonesia yang lugas dan berbobot tanpa ada pengulangan kata prompt.`;
+
+      const response = await ai.models.generateContent(
+        {
+          model: "gemini-2.5-flash",
+          contents: prompt,
+        },
+        { signal: abortControllerRef.current.signal },
+      );
+
+      if (response && response.text) {
+        setAiInsight(response.text);
+      } else {
+        setAiInsight("Gagal memuat analisis AI.");
+      }
+    } catch (e) {
+      if (e.name !== "AbortError") {
+        setAiInsight(
+          "Server AI sedang sibuk (503). Silakan muat ulang beberapa saat lagi.",
+        );
+      }
+    } finally {
+      if (!abortControllerRef.current?.signal.aborted) {
+        setIsLoadingAi(false);
+      }
+    }
+  };
 
   const handleDone = (payload) => {
     setResult(payload);
+    fetchAiInsight(payload);
 
     setHistory((prevHistory) => {
       const isExist = prevHistory.some(
@@ -39,6 +102,7 @@ export default function App() {
 
   const handleSelectHistory = (pastResult) => {
     setResult(pastResult);
+    fetchAiInsight(pastResult);
     setScreen("output");
   };
 
@@ -94,6 +158,8 @@ export default function App() {
         ) : (
           <OutputDashboard
             resultData={result}
+            aiInsight={aiInsight}
+            isLoadingAi={isLoadingAi}
             onBackToInput={() => setScreen("input")}
           />
         )}
