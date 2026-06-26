@@ -20,7 +20,7 @@ export default function App() {
     setIsLoadingAi(true);
     setAiInsight("");
     try {
-      const apiKey = "AQ.Ab8RN6JYgOo0jCXAGJzs43O_8b14GKbKiMOgCl-Ln5_7DADJDw";
+      const apiKey = "x";
       const ai = new GoogleGenAI({ apiKey });
       const delta = payload.candResult.total - payload.existResult.total;
 
